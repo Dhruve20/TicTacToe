@@ -201,8 +201,7 @@ public class ai extends AppCompatActivity {
 
         return 0;
     }
-    public int minimax(int game[][],
-                       int depth, Boolean isMax)
+    public int minimax(int game[][] , Boolean isMax)
     {
         int score = evaluate();
 
@@ -230,10 +229,9 @@ public class ai extends AppCompatActivity {
                         game[i][j] = ai;
 
 
-                        best = Math.max(best, minimax(game,
-                                depth + 1, false));
+                        best = Math.max(best, minimax(game, false));
 
-                        // Undo the move
+
                         game[i][j] = 0;
                     }
                 }
@@ -246,23 +244,21 @@ public class ai extends AppCompatActivity {
         {
             int best = Integer.MAX_VALUE;
 
-            // Traverse all cells
+
             for (int i = 0; i < 3; i++)
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    // Check if cell is empty
+
                     if (game[i][j] == 0)
                     {
-                        // Make the move
+
                         game[i][j] = player;
 
-                        // Call minimax recursively and choose
-                        // the minimum value
-                        best = Math.min(best, minimax(game,
-                                depth + 1, true));
 
-                        // Undo the move
+                        best = Math.min(best, minimax(game, true));
+
+
                         game[i][j] = 0;
                     }
                 }
@@ -275,29 +271,24 @@ public class ai extends AppCompatActivity {
         int bestVal = Integer.MIN_VALUE;
         int [] move = {-1,-1};
 
-        // Traverse all cells, evaluate minimax function
-        // for all empty cells. And return the cell
-        // with optimal value.
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-                // Check if cell is empty
+
                 if (game[i][j] == 0)
                 {
-                    // Make the move
+
                     game[i][j] = ai;
 
-                    // compute evaluation function for this
-                    // move.
-                    int moveVal = minimax(game, 0, false);
 
-                    // Undo the move
+                    int moveVal = minimax(game, false);
+
+
                     game[i][j] = 0;
 
-                    // If the value of the current move is
-                    // more than the best value, then update
-                    // best/
+
                     if (moveVal > bestVal)
                     {
                         move[0] = i;
